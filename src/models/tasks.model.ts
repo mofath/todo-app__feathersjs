@@ -3,7 +3,7 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from "../declarations";
-import { Model, Mongoose } from "mongoose";
+import mongoose, { Model, Mongoose } from "mongoose";
 
 export default function (app: Application): Model<any> {
   const modelName = "tasks";
@@ -18,8 +18,12 @@ export default function (app: Application): Model<any> {
       },
       isFinished: { type: Boolean, default: false },
       time: {
-        type: Number,
+        type: Number, // number represents hours spent on the task
         default: 0,
+      },
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
       },
     },
     {
